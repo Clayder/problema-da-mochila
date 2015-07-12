@@ -20,22 +20,34 @@ if (isset($_POST['valida'])) {
             <div class="span12">
                 <?php if ($qtd == NULL): ?>
                     <div class="input-append input-qtd">
-                        <form class="form-inline" action="index.php" method="POST" >
+                        <form class="form-horizontal" action="index.php" method="POST" >
                             <input type="hidden" name="valida" value="true" />
-                            <input type="text" name='pesoMaximo' class="input-xlarge" placeholder="Qual o peso máximo da mochila ?">
-                            <input type="text" name='qtd' class="input-medium" placeholder="Quantos itens ?">
-                            <button class="btn btn-success" type="submit">Criar Mochila</button>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="Number" name='pesoMaximo' class="input-xxlarge" placeholder="Peso m&aacute;ximo da mochila ?">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="Number" name='qtd' class="input-medium" placeholder="Quantos itens ?">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button class="btn btn-success" type="submit">Criar Mochila</button>
+                                </div>
+                            </div>                            
                         </form>
                     </div>
                 <?php else: ?> 
                     <table class="table table-bordered table-striped table-hover">
-                        <caption><h1>Mochila peso máximo = <span class="peso-maximo"> <?php echo $pesoMaximo ?> Kg </span> </h1></caption>
+                        <caption><h1>Mochila peso m&aacute;ximo = <span class="peso-maximo"> <?php echo $pesoMaximo ?> Kg </span> </h1></caption>
                         <thead>
                             <tr>
                                 <th><center>#</center></th>
-                                <th><center>Peso</center></th>
-                                <th><center>Valor</center></th>
-                            </tr>
+                        <th><center>Peso</center></th>
+                        <th><center>Valor</center></th>
+                        </tr>
                         </thead>
                         <tbody>
                         <form action='view-mochila.php' method="POST">
@@ -46,8 +58,8 @@ if (isset($_POST['valida'])) {
                                 <tr>
                                     <?php echo "<input type='hidden' name='matriz[$i][1]' value='$i'>" ?>
                                     <td><center><?php echo $i ?></center></td>
-                                    <td><center><?php echo "<input type='text' name='matriz[$i][2]' class='input-small' placeholder='Qual o peso ?'>" ?></center></td>
-                                    <td><center><?php echo "<input type='text' name='matriz[$i][3]' class='input-small' placeholder='Qual o valor ?'>" ?></center></td>
+                                <td><center><?php echo "<input type='Number' name='matriz[$i][2]' class='input-medium' placeholder='Qual o peso ?'>" ?></center></td>
+                                <td><center><?php echo "<input type='Number' name='matriz[$i][3]' class='input-medium' placeholder='Qual o valor ?'>" ?></center></td>
                                 </tr>
                             <?php endfor; ?>
                             <tr>

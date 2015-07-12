@@ -43,13 +43,13 @@ if (isset($_POST['matriz'])):
                 <div class="span12">
 
                     <table class="table table-bordered table-striped table-hover">
-                        <caption><center><h1>Mochila peso máximo = <span class="peso-maximo"> <?php echo $pesoMaximo ?> Kg </span> </h1></center></caption>
+                        <caption><center><h1>Mochila peso m&aacute;ximo = <span class="peso-maximo"> <?php echo $pesoMaximo ?> Kg </span> </h1></center></caption>
                         <thead>
                             <tr>
                                 <th><center>#</th>
                             <th><center>Peso</center></th>
                             <th><center>Valor</center></th>
-                            <th><center>Razão</center></th>
+                                <th><center>Raz&atilde;o</center></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -70,7 +70,7 @@ if (isset($_POST['matriz'])):
                             <tr>
                                 <th><center>Maior Valor</center></th>
                         <th><center>Menor Peso</center></th>
-                        <th><center>Maior Razão</center></th>
+                        <th><center>Maior Raz&atilde;o</center></th>
                         </tr>
                         </thead>
                         <tbody>

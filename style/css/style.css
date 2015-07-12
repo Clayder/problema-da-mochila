@@ -1,6 +1,5 @@
 div.margem{
-    margin: 50px;
-    background-color: #f2f2f2;
+    margin: 10px auto;
 }
 
 div.input-qtd{
@@ -33,3 +32,12 @@ div.separador{
     border: 3px solid #333333;
     margin-bottom: 10px;
 }
+
+div.teste{
+    background-color: #0077b3;
+}
+
+div.teste2{
+    background-color: #000;
+}
+
