@@ -1,121 +1,163 @@
 <?php
-
 include 'classe/mochila.php';
 
-/*
-  $matriz[0]['item'] = 0;
-  $matriz[0]['peso'] = 10;
-  $matriz[0]['valor'] = 30;
-  $matriz[0]['razao'] = 30/10;
+if (isset($_POST['matriz'])):
+    $qtd = $_POST['qtd'];
+    $pesoMaximo = $_POST['pesoMaximo'];
+    $matrizForm = $_POST['matriz'];
 
-  $matriz[1]['item'] = 1;
-  $matriz[1]['peso'] = 25;
-  $matriz[1]['valor'] = 15;
-  $matriz[1]['razao'] = 15/25;
+    // forma a matriz da mochila 
+    for ($i = 0; $i < $qtd; $i++) {
+        $matriz[$i]['item'] = $matrizForm[$i][1];
+        $matriz[$i]['peso'] = $matrizForm[$i][2];
+        $matriz[$i]['valor'] = $matrizForm[$i][3];
+        $matriz[$i]['razao'] = $matriz[$i]['valor'] / $matriz[$i]['peso'];
+    }
 
-  $matriz[2]['item'] = 2;
-  $matriz[2]['peso'] = 20;
-  $matriz[2]['valor'] = 10;
-  $matriz[2]['razao'] = 10/20;
-
-  $matriz[3]['item'] = 3;
-  $matriz[3]['peso'] = 15;
-  $matriz[3]['valor'] = 25;
-  $matriz[3]['razao'] = 25/15;
- */
-$matriz[0]['item'] = 0;
-$matriz[0]['peso'] = 3;
-$matriz[0]['valor'] = 9;
-$matriz[0]['razao'] = 9 / 3;
-
-$matriz[1]['item'] = 1;
-$matriz[1]['peso'] = 6;
-$matriz[1]['valor'] = 13;
-$matriz[1]['razao'] = 13 / 6;
-
-$matriz[2]['item'] = 2;
-$matriz[2]['peso'] = 2;
-$matriz[2]['valor'] = 5;
-$matriz[2]['razao'] = 5 / 2;
-
-$matriz[3]['item'] = 3;
-$matriz[3]['peso'] = 4;
-$matriz[3]['valor'] = 10;
-$matriz[3]['razao'] = 10 / 4;
-
-$matriz[4]['item'] = 4;
-$matriz[4]['peso'] = 5;
-$matriz[4]['valor'] = 16;
-$matriz[4]['razao'] = 16 / 5;
-
-$matriz[5]['item'] = 5;
-$matriz[5]['peso'] = 7;
-$matriz[5]['valor'] = 20;
-$matriz[5]['razao'] = 20 / 7;
-
-$matriz[6]['item'] = 6;
-$matriz[6]['peso'] = 1;
-$matriz[6]['valor'] = 4;
-$matriz[6]['razao'] = 4 / 1;
-
-$matriz[7]['item'] = 7;
-$matriz[7]['peso'] = 8;
-$matriz[7]['valor'] = 27;
-$matriz[7]['razao'] = 27 / 8;
-
-$matriz[8]['item'] = 8;
-$matriz[8]['peso'] = 10;
-$matriz[8]['valor'] = 28;
-$matriz[8]['razao'] = 28 / 10;
-
-echo "<pre>";
-print_r($matriz);
-echo "</pre>";
-
-$qtdItens = 9;
-$pesoMaximo = 20;
-
-echo "ITEM DE MAIOR VALOR: Retorna os itens e o custo";
-echo "</br>";
-$resultMaiorValor = new Mochila($matriz, $pesoMaximo, $qtdItens);
-
-$resultMaiorValor->mochilaMaiorValor();
-echo "</br>";
-echo "Custo Parcial =" . $resultMaiorValor->getCustoParcial();
-echo "</br>";
-echo "Peso Parcial =" . $resultMaiorValor->getPesoParcial();
-echo "</br>";
-echo "<pre>";
-print_r($resultMaiorValor->getVetorSolucao());
-echo "</pre>";
-echo "</pre>";
-
-echo "ITEM DE MENOR PESO: Retorna os itens e o custo";
-
-$resultMenorPeso = new Mochila($matriz, $pesoMaximo, $qtdItens);
-echo "</br>";
-$resultMenorPeso->mochilaMenorPeso();
-echo "</br>";
-echo "Custo Parcial =" . $resultMenorPeso->getCustoParcial();
-echo "</br>";
-echo "Peso Parcial =" . $resultMenorPeso->getPesoParcial();
-echo "</br>";
-echo "<pre>";
-print_r($resultMenorPeso->getVetorSolucao());
-echo "</pre>";
+    // ITEM DE MAIOR VALOR: Retorna os itens e o custo;
+    $resultMaiorValor = new Mochila($matriz, $pesoMaximo, $qtd);
+    $resultMaiorValor->mochilaMaiorValor();
 
 
-echo "ITEM DE MAIOR Razão: Retorna os itens e o custo";
-echo "</br>";
-$resultMaiorRazao = new Mochila($matriz, $pesoMaximo, $qtdItens);
+    //ITEM DE MENOR PESO: Retorna os itens e o custo
+    $resultMenorPeso = new Mochila($matriz, $pesoMaximo, $qtd);
+    $resultMenorPeso->mochilaMenorPeso();
 
-$resultMaiorRazao->mochilaMaiorRazao();
-echo "</br>";
-echo "Custo Parcial =" . $resultMaiorRazao->getCustoParcial();
-echo "</br>";
-echo "Peso Parcial =" . $resultMaiorRazao->getPesoParcial();
-echo "</br>";
-echo "<pre>";
-print_r($resultMaiorRazao->getVetorSolucao());
-echo "</pre>";
-echo "</pre>";
+
+    // "ITEM DE MAIOR Razão: Retorna os itens e o custo"
+    $resultMaiorRazao = new Mochila($matriz, $pesoMaximo, $qtd);
+    $resultMaiorRazao->mochilaMaiorRazao();
+    ?>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Problema da mochila</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- Bootstrap -->
+            <link href="style/css/bootstrap.min.css" rel="stylesheet" media="screen">
+            <link href="style/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+            <link href="style/css/style.css" rel="stylesheet" media="screen">
+        </head>
+        <body>
+            <div class="row margem">
+                <div class="span12">
+
+                    <table class="table table-bordered table-striped table-hover">
+                        <caption><center><h1>Mochila peso máximo = <span class="peso-maximo"> <?php echo $pesoMaximo ?> Kg </span> </h1></center></caption>
+                        <thead>
+                            <tr>
+                                <th><center>#</th>
+                            <th><center>Peso</center></th>
+                            <th><center>Valor</center></th>
+                            <th><center>Razão</center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < $qtd; $i++): ?>
+                                    <tr>
+                                        <td><center><?php echo $i ?></center></td>
+                                <td><center><?php echo $matriz[$i]['peso'] ?></center></td>
+                                <td><center><?php echo $matriz[$i]['valor'] ?></center></td>
+                                <td><center><?php echo $matriz[$i]['valor'] / $matriz[$i]['peso'] ?></center></td>
+                                </tr>
+                            <?php endfor; ?>
+                            </tbody>
+                    </table>
+                    </br> </br>
+                    <table class="table table-bordered table-striped table-hover">
+                        <caption><center><h1>Resultado</h1></center></caption>
+                        <thead>
+                            <tr>
+                                <th><center>Maior Valor</center></th>
+                        <th><center>Menor Peso</center></th>
+                        <th><center>Maior Razão</center></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                        <center>
+                            <?php
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "</br>";
+                            echo "<p><span class='itens'>Custo Parcial = </span>" . $resultMaiorValor->getCustoParcial() . "</p>";
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "<p><span class='itens'>Peso Parcial = </span>" . $resultMaiorValor->getPesoParcial() . "</p>";
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            $itensMaiorValor = $resultMaiorValor->getVetorSolucao();
+                            for ($i = 0; $i < count($itensMaiorValor); $i++) {
+                                echo "<p><span class='itens'>Item </span>" . $itensMaiorValor[$i] . "</p>";
+                                echo '</br>';
+                            }
+                            ?>
+                        </center>
+                        </td>
+                        <td>
+                        <center>
+                            <?php
+                            $itensMenorPeso = $resultMenorPeso->getVetorSolucao();
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "</br>";
+                            echo "<p><span class='itens'>Custo Parcial = </span>" . $resultMenorPeso->getCustoParcial() . '</p>';
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "<p><span class='itens'>Peso Parcial = </span>" . $resultMenorPeso->getPesoParcial() . '</p>';
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            for ($i = 0; $i < count($itensMenorPeso); $i++) {
+                                echo "<p><span class='itens'> Item </span>" . $itensMenorPeso[$i] . "</p>";
+                                echo '</br>';
+                            }
+                            ?>
+                        </center>
+                        </td>
+                        <td>
+                        <center>
+                            <?php
+                            $itenMaiorRazao = $resultMaiorRazao->getVetorSolucao();
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "</br>";
+                            echo "<p><span class='itens'>Custo Parcial = </span>" . $resultMaiorRazao->getCustoParcial() . '</p>';
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            echo "<p><span class='itens'>Peso Parcial = </span>" . $resultMaiorRazao->getPesoParcial() . '</p>';
+                            echo "</br>";
+
+                            echo "<div class='separador'>";
+                            echo "</div>";
+                            for ($i = 0; $i < count($itenMaiorRazao); $i++) {
+                                echo "<p><span class='itens'> Item </span>" . $itenMaiorRazao[$i] . "</p>";
+                                echo '</br>';
+                            }
+                            ?>
+                        </center>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script src="http://code.jquery.com/jquery-latest.js"></script>
+            <script src="style/js/bootstrap.min.js"></script>
+        </body>
+    </html>
+
+    <?php
+else:
+    header('location: index.php'); 
+endif;

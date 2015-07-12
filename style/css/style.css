@@ -1,0 +1,35 @@
+div.margem{
+    margin: 50px;
+    background-color: #f2f2f2;
+}
+
+div.input-qtd{
+    margin: 3px;
+}
+
+span.peso-maximo{
+    color: #0077b3;
+}
+
+thead{
+    background-color: #333333;
+    color: #FFF;
+}
+
+thead>tr{
+    font-size: 20px;
+}
+
+p{
+    color: #0077b3;
+}
+
+span.itens{
+    color:#333333;
+}
+
+div.separador{
+    width: 100%;
+    border: 3px solid #333333;
+    margin-bottom: 10px;
+}
